@@ -18,5 +18,12 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        $this->call(MajorCategorySeeder::class);
+        $this->command->info('✅ MajorCategorySeeder completed.');
+        
+        $this->call(ProductSeeder::class);
+        $this->command->info('✅ ProductSeeder completed.');
+
+
     }
 }
