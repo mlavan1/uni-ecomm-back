@@ -12,18 +12,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $seeders = [
+            MajorCategorySeeder::class,
+            SubCategorySeeder::class,
+            BrandSeeder::class,
+            ScaleSeeder::class,
+            ProductSeeder::class,
+        ];
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        $this->call(MajorCategorySeeder::class);
-        $this->command->info('✅ MajorCategorySeeder completed.');
-        
-        $this->call(ProductSeeder::class);
-        $this->command->info('✅ ProductSeeder completed.');
-
-
+        foreach ($seeders as $seeder) {
+            $this->call($seeder);
+            $this->command->info("✅ {$seeder} completed.");
+            $this->command->line('');
+        }
     }
 }

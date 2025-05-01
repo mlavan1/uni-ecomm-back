@@ -14,6 +14,7 @@ class MajorCategoryController extends Controller
         $data = DB::table('major_categories')
         ->where('is_active','Y')
         ->get();
+        
         Log::info($data);
 
         return response()->json(['status'=> true, 'data'=>$data]);
