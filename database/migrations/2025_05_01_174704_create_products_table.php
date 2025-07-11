@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('code',50)->default('');
             $table->string('nameOf',200)->default('');
+            $table->string('slug',200)->default('');
             $table->string('description',500)->default('');
             $table->string('imgPath',500)->default('');
             $table->string('isActive',5)->default('Y');

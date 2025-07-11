@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\MajorCategoryController;
+use App\Http\Controllers\Api\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +22,24 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/products', [ProductController::class, 'index']);
-Route::get('/eletronic-products', [ProductController::class, 'allElectronicProducts']);
+Route::get('/products-all', [ProductController::class, 'allProducts']);
+Route::get('/get-product-by-code/{id}', [ProductController::class, 'getProductById']);
+Route::get('/electronic-products', [ProductController::class, 'allElectronicProducts']);
+Route::get('/furniture-products', [ProductController::class, 'allFurnitureProducts']);
+Route::get('/clothing-products', [ProductController::class, 'allClothingProducts']);
+
 Route::get('/all-categories', [MajorCategoryController::class, 'index']);
+Route::get('/shop-categories', [MajorCategoryController::class, 'all_categories']);
+Route::get('/get-top-categories', [MajorCategoryController::class, 'getTopEightCategories']);
 
 Route::get('/health-check', function () {
     return response()->json(['status' => 'ok']);
 });
 
+Route::middleware('api')->group(function () {
+    Route::post('/cart/add', [CartController::class, 'add']);
+    Route::get('/cart', [CartController::class, 'get']);
+    Route::delete('/cart/{id}', [CartController::class, 'remove']);
+});
+
+Route::get('/products-filtered', [ProductController::class, 'filteredProducts']);
